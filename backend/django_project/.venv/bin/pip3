@@ -1,4 +1,4 @@
-#!/home/sanaz/my_Projects/Insurance_Fraud_Detection/backend/django_project/.venv/bin/python3
+#!/home/sanaz/my_Projects/Insurance_Fraud_Detection/backend/django_project/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
