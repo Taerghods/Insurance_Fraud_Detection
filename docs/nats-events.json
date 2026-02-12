@@ -1,0 +1,16 @@
+{
+  "fraud.alert": {
+    "description": "Sent when fraud score >= 30",
+    "publisher": "signals.py",
+    "schema": {
+      "claim_id": "int",
+      "fraud_score": "float",
+      "severity": "low/medium/high"
+    },
+    "example": {
+      "claim_id": 5,
+      "fraud_score": 75,
+      "severity": "high"
+    }
+  }
+}
