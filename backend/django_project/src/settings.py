@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # my apps:
-    'Claims',
+    'claims',
 
     # django_app:
     'rest_framework',
@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
 # docker compose ps
 # docker compose logs neo4j
 # docker exec -it fraud_django python manage.py createsuperuser
-
+# docker exec -it fraud_django python manage.py sync_neo4j
 
 # sudo systemctl stop postgresql
 # sudo systemctl start postgresql
