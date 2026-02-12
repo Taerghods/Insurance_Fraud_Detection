@@ -126,3 +126,12 @@ REST_FRAMEWORK = {
 }
 
 
+# docker compose up -d --build
+# docker compose down
+# docker compose ps
+# docker compose logs neo4j
+# docker exec -it fraud_django python manage.py createsuperuser
+
+
+# sudo systemctl stop postgresql
+# sudo systemctl start postgresql
