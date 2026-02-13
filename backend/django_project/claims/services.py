@@ -17,7 +17,6 @@ def sync_all_to_neo4j():
     neo4j.close()
     print("✅ All insured members synced to Neo4j")
 
-
 class Neo4jClient:
     def __init__(self):
         self.driver = GraphDatabase.driver(
@@ -99,10 +98,11 @@ class Neo4jClient:
                 MATCH (i:Insured {id: $id})
                 OPTIONAL MATCH (i)-[:HAS_PHONE]->(p)<-[:HAS_PHONE]-(phone_frauds:Insured)
                 WHERE phone_frauds.id <> i.id
-                WITH i, COUNT(DISTINCT phone_frauds) AS phone_fraud_count
                 OPTIONAL MATCH (i)-[:HAS_ADDRESS]->(a)<-[:HAS_ADDRESS]-(address_frauds:Insured)
                 WHERE address_frauds.id <> i.id
-                RETURN phone_fraud_count * 30 + address_fraud_count * 20 AS fraud_score
+                RETURN 
+                    COUNT(DISTINCT phone_frauds) * 30 + 
+                    COUNT(DISTINCT address_frauds) * 20 AS fraud_score
             """, id=insured_id)
 
             record = result.single()

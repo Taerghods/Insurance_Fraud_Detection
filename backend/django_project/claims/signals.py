@@ -54,16 +54,18 @@ def create_fraud_alert_and_notify(sender, instance, created, **kwargs):
         # Send NATS notification
         try:
             nats_client = NATSClient()
-            asyncio.run(nats_client.connect())
-            asyncio.run(nats_client.publish_fraud_alert(
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(nats_client.connect())
+            loop.run_until_complete(nats_client.publish_fraud_alert(
                 claim_id=instance.id,
                 fraud_score=instance.fraud_score,
                 signals=["Duplicate phone number" if instance.fraud_score >= 30 else "Duplicate address"]
             ))
-            asyncio.run(nats_client.close())
+            loop.run_until_complete(nats_client.close())
+            loop.close()
         except Exception as e:
             print(f"⚠️ NATS notification failed: {e}")
-
 
 # ================ Fraud Alert Signals ================
 @receiver(post_save, sender=Claim)
